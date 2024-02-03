@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import ThemeAppProvider from './components/ThemeAppProvider';
 import Header from './components/Header';
-
+import Context from './components/Context';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <ThemeAppProvider>
         <body className={`${inter.className} `}>
+          <Context>
           <Header />
           <main className="container mx-auto ">{children}</main>
+          </Context>
         </body>
       </ThemeAppProvider>
     </html>
