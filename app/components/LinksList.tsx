@@ -1,10 +1,12 @@
 import React from 'react';
 import { Card, Typography, Tooltip, Button } from '@material-tailwind/react';
 import { motion } from 'framer-motion';
+import { FaCopy } from 'react-icons/fa';
+
 import Link from 'next/link';
 const TABLE_HEAD = ['короткая ссылка', 'исходная ссылка', 'кол-во переходов', ''];
 
-const LinksList = ({ arr, modal, setModal,fetchLinks }) => {
+const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
   return (
     <motion.div>
       <Card className="h-full w-full overflow-scroll">
@@ -31,12 +33,25 @@ const LinksList = ({ arr, modal, setModal,fetchLinks }) => {
 
               return (
                 <tr key={id}>
-                  <td className={classes}>
-                    <Typography  variant="small" color="blue-gray" className="font-normal">
-                      <Link onClick={() => fetchLinks()} target="blank" href={`https://front-test.hex.team/s/${short}`}>
+                  <td className={`${classes} flex items-center gap-4`}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
+                      <Link
+                        onClick={() => fetchLinks()}
+                        target="blank"
+                        href={`https://front-test.hex.team/s/${short}`}>
                         https://front- test.hex.team/s/${short}
                       </Link>
                     </Typography>
+                    <Button
+                      onClick={() => {
+                        navigator.clipboard.writeText('https://front-test.hex.team/s/' + short);
+                      }}
+                      color="indigo">
+                      <FaCopy size={10} />
+                    </Button>
                   </td>
                   <td className={classes}>
                     <Typography variant="small" color="blue-gray" className="font-normal">
