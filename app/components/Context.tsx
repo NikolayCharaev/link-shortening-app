@@ -9,6 +9,7 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   setAuthenticated: (value: boolean) => void;
   token?: string;
+  setToken : any
 }
 
 export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -21,12 +22,13 @@ const Context: FC<AuthContextProps> = ({ children }) => {
       const storedToken = localStorage.getItem('token');
       setToken(storedToken || '');
     }
-  }, []);
+  }, [token]);
 
   const contextValue: AuthContextValue = {
     isAuthenticated,
     setAuthenticated,
     token,
+    setToken
   };
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;

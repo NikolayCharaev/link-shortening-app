@@ -19,6 +19,9 @@ const LinksWrapper = () => {
 
   async function fetchLinks() {
     try {
+      // if (!token) {
+      //   return
+      // }
       const { data } = await axios.get(
         `https://front-test.hex.team/api/statistics?offset=${pagination}&limit=10`,
         {
@@ -37,7 +40,8 @@ const LinksWrapper = () => {
 
   useEffect(() => {
     fetchLinks();
-  }, [pagination]);
+  }, [pagination, token]);
+
   return (
     <motion.div
       className="mt-10"
@@ -45,6 +49,7 @@ const LinksWrapper = () => {
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeOut', duration: 0.4 }}
       exit={{ opacity: 0 }}>
+
       {!token && (
         <Card className="p-8 mt-10 flex flex-row justify-between">
           <Typography variant="h5">Для начала работы вам необходимо авторизоваться :)</Typography>
@@ -55,7 +60,7 @@ const LinksWrapper = () => {
           </Link>
         </Card>
       )}
-      {links.length <= 0 && (
+      {links.length <= 0 && token && (
         <Card className="p-8 mt-10 flex flex-row justify-between">
           <Typography variant="h5">
             У вас тут пока ничего нет, давайте сократим нашу первую ссылку :){' '}
@@ -67,7 +72,7 @@ const LinksWrapper = () => {
         </Card>
       )}
 
-      {token && links.length > 0 && (
+      {token && links.length > 0 ? (
         <>
           <LinksList modal={modal} fetchLinks={fetchLinks} setModal={setModal} arr={links} />
           <div className=" flex items-center justify-center gap-10">
@@ -89,8 +94,9 @@ const LinksWrapper = () => {
             </Button>
           </div>
         </>
+      ) : (
+        ''
       )}
-
       <SetSqueeze fetchLinks={fetchLinks} modal={modal} setModal={setModal} />
     </motion.div>
   );

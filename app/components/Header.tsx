@@ -3,12 +3,14 @@ import { useEffect, useState, useContext } from 'react';
 import { IoHome } from 'react-icons/io5';
 
 import { Button, Tooltip, Avatar } from '@material-tailwind/react';
+import { IoIosExit } from 'react-icons/io';
+
 import { FaUserPlus, FaUserPen } from 'react-icons/fa6';
 import { AuthContext } from './Context';
 import Link from 'next/link';
 
 const Header = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, setToken, token } = useContext(AuthContext);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
@@ -32,6 +34,17 @@ const Header = () => {
             {username.length > 0 && (
               <Tooltip className="bg-[#3949ab]" content={username}>
                 <Avatar src="https://scientificrussia.ru/images/b/teb-full.jpg" alt="avatar" />
+              </Tooltip>
+            )}
+            {token && (
+              <Tooltip className="bg-[#3949ab]" content="Выход">
+                <Button onClick={() => {
+                  setToken('')
+                  window.localStorage.removeItem('token')
+                  window.localStorage.removeItem('username')
+                }} color="indigo">
+                  <IoIosExit size={20} />
+                </Button>
               </Tooltip>
             )}
 

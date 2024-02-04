@@ -1,11 +1,9 @@
-import React from 'react';
 import { Card, Typography, Tooltip, Button } from '@material-tailwind/react';
 import { motion } from 'framer-motion';
 import { FaCopy } from 'react-icons/fa';
 
 import Link from 'next/link';
 const TABLE_HEAD = ['короткая ссылка', 'исходная ссылка', 'кол-во переходов', ''];
-
 const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
   return (
     <motion.div>
@@ -45,6 +43,7 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
                         https://front- test.hex.team/s/${short}
                       </Link>
                     </Typography>
+
                     <Button
                       onClick={() => {
                         navigator.clipboard.writeText('https://front-test.hex.team/s/' + short);

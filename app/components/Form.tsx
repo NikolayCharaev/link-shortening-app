@@ -12,7 +12,7 @@ interface IFormProps {
   type: string;
 }
 const Form = ({ type }: IFormProps) => {
-  const { setAuthenticated, isAuthenticated } = useContext(AuthContext);
+  const { setAuthenticated, isAuthenticated, setToken } = useContext(AuthContext);
   const [userName, setUserName] = useState('');
   const [userPassword, setPassword] = useState('');
 
@@ -33,6 +33,7 @@ const Form = ({ type }: IFormProps) => {
 
         if ('access_token' in data) {
           window.localStorage.setItem('token', data.access_token);
+          setToken(data.access_token)
           window.localStorage.setItem('username', userName);
           setPerfomed(true);
           setStatus('success');
