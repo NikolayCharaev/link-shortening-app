@@ -8,7 +8,7 @@ import { AuthContext } from './Context';
 import Link from 'next/link';
 
 const Header = () => {
-  const { setAuthenticated, isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
@@ -29,12 +29,11 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            {isAuthenticated ||
-              (username && (
-                <Tooltip className="bg-[#3949ab]" content={window.localStorage.getItem('username')}>
-                  <Avatar src="https://scientificrussia.ru/images/b/teb-full.jpg" alt="avatar" />
-                </Tooltip>
-              ))}
+            {username.length > 0 && (
+              <Tooltip className="bg-[#3949ab]" content={username}>
+                <Avatar src="https://scientificrussia.ru/images/b/teb-full.jpg" alt="avatar" />
+              </Tooltip>
+            )}
 
             <Link href="/login">
               <Tooltip className="bg-[#3949ab]" content="Авторизация">

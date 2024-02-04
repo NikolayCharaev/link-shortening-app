@@ -57,7 +57,6 @@ const Form = ({ type }: IFormProps) => {
             router.push('/login');
           }, 2000);
         }
-        console.log(data);
       }
     } catch (err) {
       setStatus('fail');
@@ -75,7 +74,8 @@ const Form = ({ type }: IFormProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeOut', duration: 0.4 }}
-      exit={{ opacity: 0 }}>
+      exit={{ opacity: 0 }}
+      >
       <AnimatePresence>
         {pervomed && (
           <motion.div
