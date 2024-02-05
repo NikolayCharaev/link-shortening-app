@@ -34,7 +34,7 @@ const Form = ({ type }: IFormProps) => {
 
         if ('access_token' in data) {
           window.localStorage.setItem('token', data.access_token);
-          setToken(data.access_token)
+          setToken(data.access_token);
           window.localStorage.setItem('username', userName);
           setPerfomed(true);
           setStatus('success');
@@ -72,12 +72,12 @@ const Form = ({ type }: IFormProps) => {
   }
 
   return (
+    //@ts-ignore
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeOut', duration: 0.4 }}
-      exit={{ opacity: 0 }}
-      >
+      exit={{ opacity: 0 }}>
       <AnimatePresence>
         {pervomed && (
           <motion.div
@@ -98,22 +98,23 @@ const Form = ({ type }: IFormProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-
+      {/* @ts-ignore */}
       <Card shadow={false} className="flex justify-center items-center mt-32 bg-[#e0f7fa] py-10">
-        <Typography variant="h4" color="blue-gray">
+        <Typography placeholder="" variant="h4" color="blue-gray">
           {type === 'login' ? 'Авторизация' : 'Регистрация'}
         </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
+        <Typography placeholder=""  color="gray" className="mt-1 font-normal">
           {type === 'register'
             ? 'Рад встрече! Введите свои данные для регистрации.'
             : 'Рад встрече! Введите свои данные для авторизации.'}
         </Typography>
         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <Typography placeholder=""  variant="h6" color="blue-gray" className="-mb-3">
               Имя пользователя
             </Typography>
             <Input
+              crossOrigin="anonymous"
               value={userName}
               onChange={(e: ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)}
               size="lg"
@@ -124,10 +125,11 @@ const Form = ({ type }: IFormProps) => {
               }}
             />
 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <Typography placeholder=""  variant="h6" color="blue-gray" className="-mb-3">
               Пароль
             </Typography>
             <Input
+              crossOrigin="anonymous"
               value={userPassword}
               onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
               type="password"
@@ -140,10 +142,10 @@ const Form = ({ type }: IFormProps) => {
             />
           </div>
 
-          <Button className="mt-6" fullWidth type="submit">
+          <Button placeholder='' className="mt-6" fullWidth type="submit">
             {type === 'login' ? 'Войти' : 'Зарегистрироваться'}
           </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
+          <Typography placeholder='' color="gray" className="mt-4 text-center font-normal">
             {type === 'login' ? 'У вас нет аккаунта? ' : 'У вас есть аккаунт? '}
             <Link
               href={type === 'login' ? '/register' : '/login'}

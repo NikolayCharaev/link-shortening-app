@@ -25,7 +25,7 @@ const Header = () => {
           <div className="">
             <Link href="/">
               <Tooltip className="bg-[#3949ab]" content="На главную">
-                <Button color="indigo">
+                <Button placeholder='' color="indigo">
                   <IoHome size={20} />
                 </Button>
               </Tooltip>
@@ -34,12 +34,12 @@ const Header = () => {
           <div className="flex items-center gap-4">
             {username.length > 0 && (
               <Tooltip className="bg-[#3949ab]" content={username}>
-                <Avatar src="https://scientificrussia.ru/images/b/teb-full.jpg" alt="avatar" />
+                <Avatar placeholder='' src="https://scientificrussia.ru/images/b/teb-full.jpg" alt="avatar" />
               </Tooltip>
             )}
             {token && (
               <Tooltip className="bg-[#3949ab]" content="Выход">
-                <Button onClick={() => {
+                <Button placeholder='' onClick={() => {
                   setToken('')
                   window.localStorage.removeItem('token')
                   window.localStorage.removeItem('username')
@@ -51,7 +51,7 @@ const Header = () => {
 
             <Link href="/login">
               <Tooltip className="bg-[#3949ab]" content="Авторизация">
-                <Button color="indigo">
+                <Button placeholder='' color="indigo">
                   <FaUserPen size={20} />
                 </Button>
               </Tooltip>
@@ -59,7 +59,7 @@ const Header = () => {
 
             <Link href="/register">
               <Tooltip className="bg-[#3949ab]" content="Регистрация">
-                <Button color="indigo">
+                <Button placeholder='' color="indigo">
                   <FaUserPlus size={20} />
                 </Button>
               </Tooltip>

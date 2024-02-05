@@ -20,9 +20,6 @@ const LinksWrapper = () => {
 
   async function fetchLinks() {
     try {
-      // if (!token) {
-      //   return
-      // }
       const { data } = await axios.get(
         `https://front-test.hex.team/api/statistics?order=${selectedOrder}&offset=${pagination}&limit=10`,
         {
@@ -41,7 +38,7 @@ const LinksWrapper = () => {
 
   useEffect(() => {
     fetchLinks();
-  }, [pagination, token, selectedOrder]);
+  }, [pagination, token, selectedOrder,  ]);
 
   return (
     <motion.div
@@ -51,22 +48,22 @@ const LinksWrapper = () => {
       transition={{ ease: 'easeOut', duration: 0.4 }}
       exit={{ opacity: 0 }}>
       {!token && (
-        <Card className="p-8 mt-10 flex flex-row justify-between">
-          <Typography variant="h5">Для начала работы вам необходимо авторизоваться :)</Typography>
+        <Card placeholder='' className="p-8 mt-10 flex flex-row justify-between">
+          <Typography placeholder='' variant="h5">Для начала работы вам необходимо авторизоваться :)</Typography>
           <Link href="/login">
-            <Button color="indigo" className="w-max">
+            <Button placeholder='' color="indigo" className="w-max">
               войти
             </Button>
           </Link>
         </Card>
       )}
       {links.length <= 0 && token && (
-        <Card className="p-8 mt-10 flex flex-row justify-between">
-          <Typography variant="h5">
+        <Card placeholder='' className="p-8 mt-10 flex flex-row justify-between">
+          <Typography placeholder='' variant="h5">
             У вас тут пока ничего нет, давайте сократим нашу первую ссылку :){' '}
           </Typography>
 
-          <Button color="indigo" className="w-max" onClick={() => setModal(true)}>
+          <Button placeholder='' color="indigo" className="w-max" onClick={() => setModal(true)}>
             Создать
           </Button>
         </Card>
@@ -78,6 +75,7 @@ const LinksWrapper = () => {
             <Select
               label="сортировать по"
               value={selectedOrder}
+              //@ts-ignore
               onChange={(select : string) => {
                 if (select) {
                   setSelectedOrder(select);
@@ -95,6 +93,7 @@ const LinksWrapper = () => {
           <LinksList modal={modal} fetchLinks={fetchLinks} setModal={setModal} arr={links} />
           <div className=" flex items-center justify-center gap-10">
             <Button
+            placeholder=''
               onClick={() => {
                 setPagination((prev) => prev - 10);
               }}
@@ -103,6 +102,7 @@ const LinksWrapper = () => {
               пред.
             </Button>
             <Button
+            placeholder=''
               onClick={() => {
                 setPagination((prev) => prev + 10);
               }}

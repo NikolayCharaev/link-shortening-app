@@ -1,19 +1,36 @@
+import { FC } from 'react';
 import { Card, Typography, Tooltip, Button } from '@material-tailwind/react';
 import { motion } from 'framer-motion';
 import { FaCopy } from 'react-icons/fa';
 
 import Link from 'next/link';
 const TABLE_HEAD = ['короткая ссылка', 'исходная ссылка', 'кол-во переходов', ''];
-const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
+
+interface LinkItem {
+  id: number;
+  target: string;
+  short: string;
+  counter: number;
+}
+
+interface LinksListProps {
+  arr: LinkItem[];
+  modal: boolean;
+  setModal: (modal: boolean) => void;
+  fetchLinks: () => void;
+}
+
+const LinksList: FC<LinksListProps> = ({ arr, modal, setModal, fetchLinks }) => {
   return (
     <motion.div>
-      <Card className="h-full w-full overflow-scroll">
+      <Card placeholder="" className="h-full w-full overflow-scroll">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
                 <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                   <Typography
+                    placeholder=""
                     variant="small"
                     color="blue-gray"
                     className="font-normal leading-none opacity-70">
@@ -33,6 +50,7 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
                 <tr key={id}>
                   <td className={`${classes} flex items-center gap-4`}>
                     <Typography
+                      placeholder=""
                       variant="small"
                       color="blue-gray"
                       className="font-normal max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
@@ -45,6 +63,7 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
                     </Typography>
 
                     <Button
+                      placeholder=""
                       onClick={() => {
                         navigator.clipboard.writeText('https://front-test.hex.team/s/' + short);
                       }}
@@ -54,6 +73,7 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
                   </td>
                   <td className={classes}>
                     <Typography
+                      placeholder=""
                       variant="small"
                       color="blue-gray"
                       className="font-normal max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
@@ -63,12 +83,13 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <Typography variant="small" color="blue-gray" className="font-normal">
+                    <Typography placeholder='' variant="small" color="blue-gray" className="font-normal">
                       {counter}
                     </Typography>
                   </td>
                   <td className={classes}>
                     <Typography
+                      placeholder=""
                       as="a"
                       href="#"
                       variant="small"
@@ -83,7 +104,7 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
           </tbody>
         </table>
       </Card>
-      <Button onClick={() => setModal(true)} color="indigo" className="mt-5">
+      <Button placeholder='' onClick={() => setModal(true)} color="indigo" className="mt-5">
         Добавить
       </Button>
     </motion.div>
