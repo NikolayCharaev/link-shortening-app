@@ -12,6 +12,7 @@ interface IFormProps {
   type: string;
 }
 const Form = ({ type }: IFormProps) => {
+  //@ts-ignore
   const { setAuthenticated, isAuthenticated, setToken } = useContext(AuthContext);
   const [userName, setUserName] = useState('');
   const [userPassword, setPassword] = useState('');

@@ -10,6 +10,7 @@ import { AuthContext } from './Context';
 import Link from 'next/link';
 
 const Header = () => {
+    //@ts-ignore
   const { isAuthenticated, setToken, token } = useContext(AuthContext);
   const [username, setUsername] = useState('');
 

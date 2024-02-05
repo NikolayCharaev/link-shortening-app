@@ -53,13 +53,12 @@ const LinksList = ({ arr, modal, setModal, fetchLinks }) => {
                     </Button>
                   </td>
                   <td className={classes}>
-                    <Typography variant="small" color="blue-gray" className="font-normal">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
                       <Tooltip content={target}>
-                        <Link href={target}>
-                          <p className="max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
-                            {target}
-                          </p>
-                        </Link>
+                        <Link href={target}>{target}</Link>
                       </Tooltip>
                     </Typography>
                   </td>

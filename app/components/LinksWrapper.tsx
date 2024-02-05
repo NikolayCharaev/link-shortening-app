@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Typography, Card, Button } from '@material-tailwind/react';
+import { Typography, Card, Button, Select, Option } from '@material-tailwind/react';
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -16,6 +16,7 @@ const LinksWrapper = () => {
   const [links, setLinks] = useState([]);
   const [modal, setModal] = useState<boolean>(false);
   const [pagination, setPagination] = useState<number>(0);
+  const [selectedOrder, setSelectedOrder] = useState<string>('asc_short');
 
   async function fetchLinks() {
     try {
@@ -23,7 +24,7 @@ const LinksWrapper = () => {
       //   return
       // }
       const { data } = await axios.get(
-        `https://front-test.hex.team/api/statistics?offset=${pagination}&limit=10`,
+        `https://front-test.hex.team/api/statistics?order=${selectedOrder}&offset=${pagination}&limit=10`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +41,7 @@ const LinksWrapper = () => {
 
   useEffect(() => {
     fetchLinks();
-  }, [pagination, token]);
+  }, [pagination, token, selectedOrder]);
 
   return (
     <motion.div
@@ -49,7 +50,6 @@ const LinksWrapper = () => {
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeOut', duration: 0.4 }}
       exit={{ opacity: 0 }}>
-
       {!token && (
         <Card className="p-8 mt-10 flex flex-row justify-between">
           <Typography variant="h5">Для начала работы вам необходимо авторизоваться :)</Typography>
@@ -74,6 +74,24 @@ const LinksWrapper = () => {
 
       {token && links.length > 0 ? (
         <>
+          <div className="w-96 mb-10">
+            <Select
+              label="сортировать по"
+              value={selectedOrder}
+              onChange={(select : string) => {
+                if (select) {
+                  setSelectedOrder(select);
+                }
+              }}>
+              <Option value="asc_short">короткая ссылка по возрастанию</Option>
+              <Option value="desc_short">короткая ссылка по убыванию</Option>
+              <Option value="asc_target">длинная ссылка по возрастанию</Option>
+              <Option value="desc_target">длинная ссылка по убыванию</Option>
+              <Option value="asc_counter">количество посещений по возрастанию</Option>
+              <Option value="desc_counter">количество посещений по убыванию</Option>
+            </Select>
+          </div>
+
           <LinksList modal={modal} fetchLinks={fetchLinks} setModal={setModal} arr={links} />
           <div className=" flex items-center justify-center gap-10">
             <Button
