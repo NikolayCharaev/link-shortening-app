@@ -36,6 +36,7 @@ const SetSqueeze: FC<SetSqueezeProps> = ({ fetchLinks, modal, setModal }) => {
       console.log(err);
     } finally {
       setModal(false);
+      setLinkValue('')
     }
   }
 
